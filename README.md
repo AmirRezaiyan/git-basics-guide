@@ -1,220 +1,111 @@
-#  What is Git?
-Git is a version control system that allows you to track changes in your project files. It helps you save, revert, and compare changes.
+<div align="center">
 
-### Example:
-Imagine you’re working on a project and you make a big mistake one day. With Git, you can easily revert to a version from yesterday when everything was working fine.
+# Git Basics Guide
 
----
+**A practical, example-driven guide to Git—from your first commit to confident collaboration.**
 
-#  What are the Benefits of Git?
-- **Track changes:** You can save and track every change you make.
-- **View history:** Git allows you to view the history of changes made to the project.
-- **Collaborate efficiently:** If you’re working in a team, Git ensures you won’t overwrite each other’s work.
-- **Host projects online:** You can share your project on platforms like GitHub to make it publicly accessible.
+[Getting Started](docs/01-getting-started.md) · [Basic Workflow](docs/02-basic-workflow.md) · [Exercises](exercises/beginner.md) · [Glossary](docs/glossary.md)
+
+</div>
 
 ---
 
-# 🔧 Installing Git
-To get started, you need to install Git. After installation, you can use Git from the terminal or command prompt.
+## About this guide
 
----
+Git is a distributed version control system used to record changes, inspect project history, experiment safely with branches, and collaborate with other developers. This repository is a structured learning guide with practical commands, explanations, exercises, and safety notes.
 
-#  Basic Git Commands
+The guide is designed for people who are new to Git as well as developers who know the basics but want a more reliable workflow. Git commands are generally the same across operating systems; a few file-creation or navigation examples use Bash/POSIX shell syntax. PowerShell alternatives are noted in the getting-started chapter where relevant.
 
-| Command                           | Simple Explanation                                          |
-|-----------------------------------|-------------------------------------------------------------|
-| `git init`                        | Initializes Git for your project (start using Git)          |
-| `git status`                      | Shows the status of your files (what’s changed, what’s not staged, etc.) |
-| `git add filename`                | Stages the file, making it ready for commit                  |
-| `git commit -m "message"`         | Commits the changes with a description                       |
-| `git log`                         | Shows the list of previous commits                          |
+## What you will learn
 
----
+- Install Git and configure your identity.
+- Understand repositories, commits, the working tree, and the staging area.
+- Record changes and inspect differences and history.
+- Create, switch, merge, and delete branches safely.
+- Understand merge and rebase, including when not to rebase.
+- Recover from common mistakes with `restore`, `reset`, `revert`, and `reflog`.
+- Temporarily save work with `stash`.
+- Work with remotes and collaborate through GitHub or another Git host.
+- Resolve merge conflicts and work with tags and selected advanced tools.
 
-#  What is GitHub?
-GitHub is a popular platform where you can upload and share your projects, collaborate with others, and improve your online resume.
+## Learning path
 
----
+| Stage | Chapter | Outcome |
+|---|---|---|
+| 1. Start | [Getting Started](docs/01-getting-started.md) | Install Git, configure it, and create or clone a repository. |
+| 2. Core workflow | [Basic Workflow](docs/02-basic-workflow.md) | Understand status, staging, commits, and `.gitignore`. |
+| 3. History | [Commits and History](docs/03-commits-and-history.md) | Review commits and compare versions of files. |
+| 4. Branches | [Branching](docs/04-branching.md) | Work on an isolated line of development. |
+| 5. Integration | [Merging](docs/05-merging.md) | Integrate a completed branch. |
+| 6. History editing | [Rebasing](docs/06-rebasing.md) | Understand linear history and safe rebase practices. |
+| 7. Recovery | [Undoing Changes](docs/07-undoing-changes.md) | Choose the correct recovery command for a mistake. |
+| 8. Pause work | [Stashing](docs/08-stashing.md) | Temporarily save unfinished changes. |
+| 9. Collaboration | [Remote Repositories](docs/09-remote-repositories.md) | Fetch, pull, push, and track remote branches. |
+| 10. Troubleshooting | [Git Conflicts](docs/10-git-conflicts.md) | Resolve conflicts during merge or rebase. |
+| 11. Releases | [Tags and Releases](docs/11-tags-and-releases.md) | Mark important points in history. |
+| 12. Beyond the basics | [Advanced Git](docs/12-advanced-git.md) | Use cherry-pick, reflog, bisect, and interactive rebase carefully. |
 
-#  Using GitHub (Basic Steps)
+For a quick lookup, use the [Glossary](docs/glossary.md). To practise, start with [Beginner Exercises](exercises/beginner.md), then continue to [Intermediate](exercises/intermediate.md) and [Advanced Exercises](exercises/advanced.md).
 
-1. **Create a Repository on GitHub**  
-   You can create a public or private repository.
+## Recommended way to practise
 
-2. **Connect Your Local Repository to GitHub**  
-   Use the following command to connect your local project to your GitHub repository:
-
-   ```bash
-   git remote add origin https://github.com/username/repo.git
-   ```
-
-3. **Push Your Project to GitHub**  
-   To upload your local changes to GitHub, use:
-
-   ```bash
-   git push -u origin master  # or main
-   ```
-
----
-
-#  Cloning and Forking Repositories
-
-### 1. Cloning a Repository
-If you want to bring a project from GitHub to your local machine, use the `git clone` command:
+Use a disposable repository. Commands such as `git reset --hard`, `git clean`, and some history-rewriting operations can discard work. Do not practise destructive commands in a project that contains important, uncommitted changes.
 
 ```bash
-git clone https://github.com/username/repo.git
+mkdir git-practice
+cd git-practice
+git init
+git status
 ```
 
-### 2. Forking a Repository
-Forking allows you to create a personal copy of someone else's repository on GitHub. After forking, you can make changes independently and submit them via a pull request.
+Create `notes.txt` in your editor with the text `My first Git practice file`, then stage it and make your first commit:
 
----
+```bash
+git add notes.txt
+git commit -m "Add practice notes"
+git log --oneline
+```
 
-#  Branches in Git
-Branches are one of the most powerful features of Git. They allow you to work on different versions of your project simultaneously without affecting the main project.
+If Git asks you to configure your identity, follow the [first-time setup instructions](docs/01-getting-started.md#first-time-configuration).
 
-### Commands:
-- **Show all branches:**
+## Essential commands at a glance
 
-  ```bash
-  git branch
-  ```
+| Goal | Command |
+|---|---|
+| Inspect current state | `git status` |
+| Stage a file | `git add <file>` |
+| Review unstaged changes | `git diff` |
+| Review staged changes | `git diff --staged` |
+| Commit staged changes | `git commit -m "Describe the change"` |
+| Review compact history | `git log --oneline --graph --decorate --all` |
+| Create and switch to a branch | `git switch -c feature/name` |
+| Switch branches | `git switch <branch>` |
+| Integrate a branch | `git merge <branch>` |
+| Download remote updates without integrating | `git fetch origin` |
+| Send a branch to a remote | `git push -u origin <branch>` |
 
-- **Create a new branch:**
+These commands are an overview, not a substitute for the chapters. Read the relevant chapter before using a command that rewrites history or discards changes.
 
-  ```bash
-  git branch new-branch-name
-  ```
+## Prerequisites
 
-- **Switch to a new branch:**
+- Git installed on your computer.
+- A terminal and basic familiarity with navigating folders.
+- A text editor.
+- A Git-hosting account only for the remote-collaboration chapters; a GitHub account is not required to learn local Git.
 
-  ```bash
-  git checkout new-branch-name
-  ```
+## Contributing
 
-- **Create and switch to a new branch in one step:**
+Corrections and improvements are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request. Every command and explanation should be accurate, reproducible, and clear about any destructive side effects.
 
-  ```bash
-  git checkout -b new-branch-name
-  ```
+## References
 
-- **Merge a branch into the main branch:**
+This guide is independently written. For authoritative command details and deeper reading, consult:
 
-  ```bash
-  git checkout master  # or main
-  git merge new-branch-name
-  ```
+- [Official Git documentation](https://git-scm.com/docs)
+- [Pro Git book](https://git-scm.com/book/en/v2)
+- [GitHub Docs: About README files](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)
+- [GitHub Docs: Licensing a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
 
----
+## License
 
-#  Rebase in Git
-Rebasing is another way to merge changes, but it keeps the history cleaner. It applies changes from one branch onto another, which results in a linear history.
-
-### Command:
-- **Rebase a branch onto another:**
-
-  ```bash
-  git checkout feature-branch
-  git rebase master
-  ```
-
----
-
-#  Staging and Unstaging Changes
-When you make changes to files, you need to stage them before committing. If you change your mind, you can unstage them.
-
-### Commands:
-- **Stage a file:**
-
-  ```bash
-  git add filename
-  ```
-
-- **Unstage a file:**
-
-  ```bash
-  git reset filename
-  ```
-
-- **Undo changes in a file (if not committed):**
-
-  ```bash
-  git checkout -- filename
-  ```
-
----
-
-#  Git Stash
-If you’re working on changes but need to switch to something else without committing your current work, you can use `git stash` to save your changes temporarily.
-
-### Commands:
-- **Save changes temporarily:**
-
-  ```bash
-  git stash
-  ```
-
-- **View stashed changes:**
-
-  ```bash
-  git stash list
-  ```
-
-- **Apply stashed changes:**
-
-  ```bash
-  git stash apply
-  ```
-
----
-
-#  Merge Conflicts
-Sometimes when two or more people work on the same file, conflicts may occur when trying to merge or rebase. Git will notify you of conflicts, and you need to resolve them manually.
-
-### Steps:
-1. **Identify the conflicting files:**  
-   Git will notify you which files have conflicts.
-
-2. **Resolve conflicts:**  
-   Open the files and manually resolve the conflicting code. Conflicts will be marked like this:
-
-   ```plaintext
-   <<<<<<< HEAD
-   Your changes
-   =======
-   Changes from the other branch
-   >>>>>>> branch-name
-   ```
-
-   You need to choose which changes to keep or combine them.
-
-3. **Stage the resolved files:**
-
-   ```bash
-   git add filename
-   ```
-
-4. **Commit the merge:**
-
-   ```bash
-   git commit
-   ```
-
----
-
-#  Undoing Changes in Git
-Sometimes, you might want to undo changes in your files. Git allows you to revert changes easily.
-
-### Commands:
-- **Undo changes in unstaged files:**
-
-  ```bash
-  git checkout -- filename
-  ```
-
-- **Undo the last commit and revert to previous changes:**
-
-  ```bash
-  git reset --hard HEAD~1
-  ```
+Unless otherwise noted, the written guide and educational materials in this repository are licensed under [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/). See [LICENSE](LICENSE) for the license notice. Git itself is a separate project and is not included or relicensed by this guide.
